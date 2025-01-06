@@ -1,59 +1,74 @@
-[![progress-banner](https://backend.codecrafters.io/progress/git/fa71da2d-0074-4569-9770-3a14144383b2)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# Git-Go: A Simple Git Implementation
 
-This is a starting point for Go solutions to the
-["Build Your Own Git" Challenge](https://codecrafters.io/challenges/git).
+Git-Go is a lightweight, custom-built implementation of Git commands in go. It helps you understand the core mechanisms behind Git operations by implementing essential commands like `init`, `cat-file`, `hash-object`, `ls-tree`, `write-tree`, and `commit-tree`. This project serves as a hands-on learning tool for understanding how Git manages files, commits, and repositories under the hood. I also attempted to use the **Strategy Pattern** for the first time to organize the command execution logic in a clean, maintainable way.
 
-In this challenge, you'll build a small Git implementation that's capable of
-initializing a repository, creating commits and cloning a public repository.
-Along the way we'll learn about the `.git` directory, Git objects (blobs,
-commits, trees etc.), Git's transfer protocols and more.
+## Features
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+- **`init`**: Initializes a new git repository, creating necessary directories.
+- **`cat-file`**: Views the contents of an object stored in the git object.
+- **`hash-object`**: Computes the hash of a file, stores it in the object, and compresses the data.
+- **`ls-tree`**: Lists the contents of a tree object in a git repository.
+- **`write-tree`**: Creates a tree object from the current directory structure.
+- **`commit-tree`**: Creates a commit object with a reference to a tree and parent commit, along with a commit message.
 
-# Passing the first stage
+## Installation
 
-The entry point for your Git implementation is in `cmd/mygit/main.go`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
+1. Clone the repository:
 
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
-```
+    ```bash
+    git clone https://github.com/kunalkashyap-1/git-go.git
+    cd git-go
+    ```
+2. Run Git-Go:
 
-That's all!
+    ```bash
+    ./your_program.sh <command> [<args>...]
+    ```
 
-# Stage 2 & beyond
+## Usage
 
-Note: This section is for stages 2 and beyond.
+Each command in Git-Go works similarly to its Git counterpart. Below is an example of how you can use these commands.
 
-1. Ensure you have `go` installed locally
-1. Run `./your_program.sh` to run your Git implementation, which is implemented
-   in `cmd/mygit/main.go`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+- **`init`**: Initializes a new repository.
 
-# Testing locally
+    ```bash
+    ./your_program.sh init
+    ```
 
-The `your_program.sh` script is expected to operate on the `.git` folder inside
-the current working directory. If you're running this inside the root of this
-repository, you might end up accidentally damaging your repository's `.git`
-folder.
+- **`cat-file`**: Shows the contents of a git object.
 
-We suggest executing `your_program.sh` in a different folder when testing
-locally. For example:
+    ```bash
+    ./your_program.sh cat-file -p <commit-sha>
+    ```
 
-```sh
-mkdir -p /tmp/testing && cd /tmp/testing
-/path/to/your/repo/your_program.sh init
-```
+- **`hash-object`**: Computes the hash of a file and stores it.
 
-To make this easier to type out, you could add a
-[shell alias](https://shapeshed.com/unix-alias/):
+    ```bash
+    ./your_program.sh hash-object -w <file-path>
+    ```
 
-```sh
-alias mygit=/path/to/your/repo/your_program.sh
+- **`ls-tree`**: Lists the contents of a tree object.
 
-mkdir -p /tmp/testing && cd /tmp/testing
-mygit init
-```
+    ```bash
+    ./your_program.sh ls-tree --name-only <commit-sha> 
+    ```
+
+- **`write-tree`**: Creates a tree object for the current directory.
+
+    ```bash
+    ./your_program.sh write-tree
+    ```
+
+- **`commit-tree`**: Creates a commit object for a given tree and parent commit.
+
+    ```bash
+    ./your_program.sh commit-tree <tree-sha> -p <parent-sha> -m "commit message"
+    ```
+
+
+## Inspiration
+
+This project was made following the blueprint provided by **Codecrafters**. The goal is to offer a deeper understanding of Git by replicating its core functionality from scratch. This approach helps illuminate how Git stores objects, manages commits, and handles repository structures. By working with these basic Git operations, you'll gain a more profound understanding of how Git works internally, which can aid in both debugging complex issues and developing new tools.
+
+In addition, I experimented with using the **Strategy Pattern** for the first time to organize the various git commands in a structured way, making the codebase more modular and easier to extend.
+

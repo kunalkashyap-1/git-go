@@ -4,6 +4,6 @@
 //
 // When updating this file, make sure to run `go mod tidy` to ensure that `go.sum` is updated too.
 
-module github.com/codecrafters-io/git-starter-go
+module github.com/kunalkashyap-1/git-go
 
 go 1.22
